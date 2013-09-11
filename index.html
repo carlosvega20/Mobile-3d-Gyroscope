@@ -1,0 +1,99 @@
+<!DOCTYPE html> 
+<html xmlns:fb="https://www.facebook.com/2008/fbml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <title>Test profundidad de campo</title>
+        <!--
+            @author: Carlos Andres Vega
+        -->
+        <style type="text/css">
+        img{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        </style>
+    </head>
+    <body>
+        
+<div id="jaja">
+    <img src="capa0.png" id="capa0">
+    <img src="capa1.png" id="capa1">
+ <img src="capa2.png" id="capa2">
+  <img src="capa3.png" id="capa3">
+   <img src="capa4.png" id="capa4">
+
+</div>
+        <script type="text/javascript">
+
+            
+
+            
+            $(document).ready(function() {
+                    $("#capa0").css("left", $('#capa0').position().left + (-50)+"px" );
+                    $("#capa3").css("left", $('#capa3').position().left + (-110)+"px" );
+                    $("#capa2").css("left", $('#capa2').position().left + (30)+"px" );
+                    $("#capa4").css("left", $('#capa4').position().left + (220)+"px" );
+                   init3();     
+              
+            });
+
+            
+var count = 0;
+
+function init3() {
+       
+        window.addEventListener('deviceorientation', function(eventData) {
+            var tiltLR = eventData.gamma;
+            var tiltFB = eventData.beta;
+            var dir = eventData.alpha
+            var motUD = null;
+            deviceOrientationHandler(tiltLR, tiltFB, dir, motUD);
+        }, false);
+    
+}
+
+var anteriorX = 0;
+var actualX   = 0;
+
+function deviceOrientationHandler(tiltLR, tiltFB, dir, motionUD) {
+    
+    
+    
+    
+    actualX = Math.round(dir);
+    if(anteriorX>actualX){
+    $("#capa4").css("left", $('#capa4').position().left + 4+"px" );
+    $("#capa3").css("left", $('#capa3').position().left + 2+"px" );
+    $("#capa2").css("left", $('#capa2').position().left + 2+"px" );
+
+    $("#capa0").css("left", $('#capa0').position().left + 2+"px" );
+        
+    }
+    if(anteriorX<actualX){
+        $("#capa4").css("left", $('#capa4').position().left +(-4)+"px" );
+        $("#capa3").css("left", $('#capa3').position().left +(-2)+"px" );
+        $("#capa2").css("left", $('#capa2').position().left +(-2)+"px" );
+
+        $("#capa0").css("left", $('#capa0').position().left +(-2)+"px" );
+       
+    }
+    anteriorX = actualX;
+}
+
+
+
+
+    
+
+
+
+            
+
+
+            
+        </script>
+        
+    </body>
+</html>
